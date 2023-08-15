@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://our.company.com/shipment.schema.json",
+    "title": "Shipment",
+    "description": "Shipment of a product.",
+    "type": "object",
+    "properties": {
+        "productId": {
+            "type": "integer",
+            "minimum": 1000
+        },
+        "name": {
+            "type": "string",
+            "minLength": 1
+        },
+        "addr": {
+            "type": "string",
+            "minLength": 1
+        },
+        "zip": {
+            "type": "string",
+            "minLength": 1
+        }
+    },
+    "additionalProperties": false,
+    "required": [
+        "productId",
+        "name",
+        "addr",
+        "zip"
+    ]
+}

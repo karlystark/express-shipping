@@ -22,4 +22,29 @@ describe("POST /", function () {
       .send();
     expect(resp.statusCode).toEqual(400);
   });
+
+  test("throws expected errors when response body is invalid", async function(){
+    const resp = await request(app)
+    .post("/shipments")
+    .send({
+      productId: "1000",
+      name: "",
+      zip: 48594,
+      happy: "yes"
+    });
+
+    expect(resp.body).toEqual({
+      "error": {
+        "message": [
+          "instance.productId is not of a type(s) integer",
+          "instance.name does not meet minimum length of 1",
+          "instance.zip is not of a type(s) string",
+          `instance is not allowed to have the additional property \"happy\"`,
+          `instance requires property \"addr\"`
+        ],
+        "status": 400
+      }
+    });
+  });
+
 });
