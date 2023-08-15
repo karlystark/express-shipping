@@ -39,7 +39,7 @@ describe("POST /", function () {
           "instance.productId is not of a type(s) integer",
           "instance.name does not meet minimum length of 1",
           "instance.zip is not of a type(s) string",
-          `instance is not allowed to have the additional property \"happy\"`,
+          "instance is not allowed to have the additional property \"happy\"",
           `instance requires property \"addr\"`
         ],
         "status": 400

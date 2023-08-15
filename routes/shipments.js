@@ -14,7 +14,14 @@ const { shipProduct } = require("../shipItApi");
  * VShips an order coming from json body:
  *   { productId, name, addr, zip }
  *
+ * All fields required:
+ * productId: an integer number that is equal to or greater than 1000.
+ * name: a string for the customer name
+ * addr: an mailing address line (like 123 Main Street)
+ * zip: a string for the zipcode
+ *
  * Returns { shipped: shipId }
+ *
  */
 
 router.post("/", async function (req, res, next) {
