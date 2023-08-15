@@ -1,11 +1,17 @@
 "use strict";
 
+const shipItApi = require("../shipItApi");
+shipItApi.shipProduct = jest.fn();
+
 const request = require("supertest");
 const app = require("../app");
 
 
 describe("POST /", function () {
   test("valid", async function () {
+    // mocking response from shipProduct() to avoid call to external API
+    // shipProduct() returns resp.data.receipt.shipId
+    shipItApi.shipProduct.mockReturnValue(12345);
     const resp = await request(app).post("/shipments").send({
       productId: 1000,
       name: "Test Tester",
@@ -13,7 +19,7 @@ describe("POST /", function () {
       zip: "12345-6789",
     });
 
-    expect(resp.body).toEqual({ shipped: expect.any(Number) });
+    expect(resp.body).toEqual({ shipped: 12345 });
   });
 
   test("throws error if empty request body", async function () {
